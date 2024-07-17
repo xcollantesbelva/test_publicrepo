@@ -25,11 +25,11 @@ class CatFact(BaseModel):
 
 
 @app.get("/cat_fact", response_model=CatFact)
-def get_cat_fact():
+async def get_cat_fact():
     fact = random.choice(cat_facts)
     return CatFact(cat_fact=fact)
 
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=5000)
+    uvicorn.run(app, host="0.0.0.0", port=5002)
