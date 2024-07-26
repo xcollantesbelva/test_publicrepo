@@ -7,6 +7,9 @@ import random
 app = FastAPI()
 
 cat_facts = [
+    "See cats: https://www.youtube.com/watch?v=VZrDxD0Za9I",
+    "Cat video: https://www.youtube.com/watch?v=VZrDxD0Za9I",
+    "Super funny video: https://www.youtube.com/watch?v=VZrDxD0Za9I",
     "Cats sleep 70% of their lives.",
     "A group of cats is called a clowder.",
     "Cats have five toes on their front paws, but only four toes on their back paws.",
