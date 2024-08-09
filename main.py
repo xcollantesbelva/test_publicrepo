@@ -1,7 +1,10 @@
 """Dummy app."""
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from pydantic import BaseModel
+from fastapi.responses import HTMLResponse
+
+import datetime
 import random
 
 app = FastAPI()
@@ -27,12 +30,29 @@ class CatFact(BaseModel):
     cat_fact: str
 
 
+@app.get("/", response_class=HTMLResponse)
+async def index():
+    return """
+    <h2>App created from public repo: <a href='https://github.com/xcollantesbelva/test_publicrepo'>https://github.com/xcollantesbelva/test_publicrepo</a></h2>
+    <iframe width="860" height="515" src="https://www.youtube.com/embed/VZrDxD0Za9I?si=SqlyK4N3x_3TDQzE"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write;
+        encrypted-media; gyroscope; picture-in-picture;
+        web-share" referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+    </iframe>
+    """
+
+
 @app.get("/cat_fact", response_model=CatFact)
-async def get_cat_fact():
+async def get_cat_fact(req: Request):
+    print(req.headers)
     fact = random.choice(cat_facts)
     return CatFact(cat_fact=fact)
 
 
 if __name__ == "__main__":
     import uvicorn
+
+    print(datetime.datetime.now())
     uvicorn.run(app, host="0.0.0.0", port=5002)
